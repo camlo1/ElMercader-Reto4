@@ -18,18 +18,32 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
-
+    
+    
     @Autowired
     private UserRepository repo;
 
+    /**
+     *  Retornar todos los usuarios
+     * @return 
+     */
     public List<User> getAll() {
         return repo.getAll();
     }
 
+    /**
+     * Guardar usuario
+     * @param usuario
+     * @return 
+     */
     public User save(User usuario) {
         return repo.save(usuario);
     }
 
+    /**
+     * Eliminar usuario por el id
+     * @param id 
+     */
     public void delete(Integer id) {
         Optional<User> ou = repo.getById(id);
         if (ou.isPresent()) {
@@ -37,6 +51,11 @@ public class UserService {
         }
     }
 
+    /**
+     * actualizar datos de usuario
+     * @param usuario
+     * @return 
+     */
     public User update(User usuario) {
         Optional<User> ou = repo.getById(usuario.getId());
         if (ou.isPresent()) {
@@ -81,6 +100,12 @@ public class UserService {
         return usuario;
     }
 
+    /**
+     * traer usuario por email y password
+     * @param email
+     * @param password
+     * @return 
+     */
     public User getByEmailAndPassword(String email, String password) {
         Optional<User> user = repo.getByEmailAndPassword(email, password);
         if (user.isPresent()) {
@@ -91,11 +116,21 @@ public class UserService {
         }
     }
 
+    /**
+     * traer unicamente email de usuario
+     * @param email
+     * @return 
+     */
     public boolean getByEmail(String email) {
         Optional<User> user = repo.getByEmail(email);
         return user.isPresent();
     }    
 
+    /**
+     * Traer usuario por id
+     * @param id
+     * @return 
+     */
     public User getById(Integer id) {
         Optional<User> user = repo.getById(id);
         if (user.isPresent()) {
